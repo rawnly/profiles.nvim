@@ -1,4 +1,4 @@
 return {
-  global_path = "~/.config/astronvim/lua/user",
-  profile_file = ".nvim-profile.json",
+	global_path = "~",
+	profile_file = ".nvim-profile.json",
 }
