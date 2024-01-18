@@ -1,17 +1,17 @@
 local utils = require("profiles.utils")
-local default_config = require("profiles.config")
+local defaults = require("profiles.config")
 
 local M = {
-	options = default_config,
+	options = defaults,
 }
 
 function M.config(opts)
-	M.options = opts
+	M.options = opts or defaults
 	return M.config
 end
 
 function M.setup(opts)
-	M.options = vim.tbl_deep_extend("force", M.options, opts or {})
+	M.options = vim.tbl_deep_extend("force", M.options, opts or defaults)
 	return M.options
 end
 
