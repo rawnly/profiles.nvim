@@ -19,9 +19,9 @@ function M.read_profile_file(options)
 	if vim.fn.filereadable(global_profile) == 1 then
 		return vim.fn.json_decode(vim.fn.readfile(global_profile))
 	else
-		local profile_content = { profile = "default" }
-		vim.fn.writefile(profile_content, global_profile)
-		return profile_content
+		return {
+			profile = "<not-found>",
+		}
 	end
 end
 
