@@ -1,25 +1,38 @@
 local utils = require("profiles.utils")
+local default_config = require("profiles.config")
 
-local M = {}
-
-M.config = {
-	global_path = "~/.config/astronvim/lua/user",
-	profile_file = ".nvim-profile.json",
+local M = {
+	options = default_config,
 }
 
-function M.setup(config)
-	M.config = vim.tbl_deep_extend("force", M.config, config or {})
+function M.config(opts)
+	M.options = opts
 	return M.config
 end
 
-function M.is(profile)
-	local cfg = utils.read_profile_file()
+function M.setup(opts)
+	M.options = vim.tbl_deep_extend("force", M.options, opts or {})
+	return M.options
+end
+
+function M.get()
+	local cfg = utils.read_profile_file(M.options)
 
 	if cfg == nil then
 		return false
 	end
 
-	return vim.fn.match(cfg.profile, profile)
+	return cfg.profile
+end
+
+function M.is(profile)
+	local cfg = utils.read_profile_file(M.options)
+
+	if cfg == nil then
+		return false
+	end
+
+	return cfg.profile == profile
 end
 
 return M
