@@ -23,15 +23,15 @@ With `profiles.nvim` you can have a global `.nvim-profile.json` (or whatever you
 
 ```lua
 require("profiles").setup({
-  profile_file = ".nvim-profile.json",
-  global_path = "~/.config/nvim" -- by default it searches for $profile_file in the nvim directory
+  filename = ".nvim-profile.json",
+  global_path = "~" -- by default it searches for $filename in the $HOME if it's not found in the `cwd`
 })
 ``` 
 
 It will try to load the given `profile_file` from the `cwd` and then if the file does not exists will try from the `global_path`. In this way you're able to set a profile for every project.
 
 ## Profiles File
-The file is dead-simple 
+The file is dead-simple:
 
 ```jsonc
 // .nvim-profile.json
@@ -48,11 +48,12 @@ The file is dead-simple
   "rawnly/profiles.nvim",
   lazy = false,
   priority = 1000, -- make sure to load before other plugins you want to manipulate
-  config = function() 
-    return {
-      profile_file = ".nvim-profile.json",
-      global_path = "~/.config/nvim"
-    }
-  end
+
+  -- atm this won't work :/ 
+  -- looks like lazy.nvim checks `enabled` / `cond` before initializing the plugins
+  opts = {
+    filename = ".nvim-profile.json",
+    global_path = "~"
+  }
 }
 ```
