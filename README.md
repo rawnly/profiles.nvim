@@ -30,6 +30,16 @@ require("profiles").setup({
 
 It will try to load the given `profile_file` from the `cwd` and then if the file does not exists will try from the `global_path`. In this way you're able to set a profile for every project.
 
+## Profiles File
+The file is dead-simple 
+
+```jsonc
+// .nvim-profile.json
+{
+    "profile": "personal"
+}
+```
+
 ## Installation
 
 ```lua
