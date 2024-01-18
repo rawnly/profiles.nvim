@@ -20,7 +20,7 @@ function M.read_profile_file(options)
 		return vim.fn.json_decode(vim.fn.readfile(global_profile))
 	else
 		local profile_content = { profile = "default" }
-		vim.fn.writefile(vim.fn.json_encode(profile_content), global_profile)
+		vim.fn.writefile(profile_content, global_profile)
 		return profile_content
 	end
 end
