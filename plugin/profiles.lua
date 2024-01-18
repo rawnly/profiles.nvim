@@ -1,7 +1,8 @@
-local M = {}
+local profiles = require("profiles")
 
-M.test = function()
-	vim.cmd("echo 'Hello from profiles'")
-end
-
-return M
+vim.api.nvim_create_user_command("GetProfile", function()
+	vim.api.nvim_echo({ { profiles.get(), "Normal" } }, false, {})
+end, {
+	desc = "Get current profile.",
+	range = false,
+})
